@@ -35,5 +35,5 @@ def main():
     calculate_func(x, y)
 
 
-if "__main__" == __name__:
+if __name__ == '__main__':
     main()

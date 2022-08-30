@@ -19,7 +19,7 @@ def get_numbers():
     return x, y
 
 
-def save_calculate(func):
+def safe_calculate(func):
     def save_version(x, y):
         if (2 * x) > 709:
             print(f"Enter a smaller number x")
@@ -36,10 +36,10 @@ def save_calculate(func):
 
 
 def main():
-    calculate_safe = save_calculate(calculate_func)
+    safe_culc_func = safe_calculate(calculate_func)
     x, y = get_numbers()
-    print(calculate_safe(x, y))
+    print(safe_culc_func(x, y))
 
 
-if "__main__" == __name__:
+if __name__ == '__main__':
     main()
