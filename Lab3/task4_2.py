@@ -1,4 +1,6 @@
-user_input = input("Enter your string: ")
+def user_input():
+    user_str = input("Enter your string: ")
+    return user_str
 
 
 def change_line(user_str):
@@ -8,14 +10,14 @@ def change_line(user_str):
     return changed_line
 
 
-def print_result():
-    changed_line = change_line(user_input)
-    print(f"Your result is: \n{changed_line}")
+def print_result(result):
+    print(f"Your result is: \n{result}")
 
 
 def main():
-    change_line(user_input)
-    print_result()
+    user_str = user_input()
+    result = change_line(user_str)
+    print_result(result)
 
 
 if '__main__' == __name__:
