@@ -1,24 +1,13 @@
 import math
 
 
+# solve this function without any errors
 def calculate_func(x, y):
-    try:
-        x = float(x)
-        y = float(y)
-        denominator = math.cos(2 * y)
-        numerator = 3.5 * x + 1
-        r = math.log(x) + (numerator / denominator)
-    except ValueError as ve:
-        print(f"There is an error - {ve}")
-    except ZeroDivisionError as zd:
-        print(f"There is an error - {zd}")
-    except TypeError as te:
-        print(f"There is an error - {te}")
-    else:
-        print(f"Result is {r}")
+    result = math.log(x) + ((3.5 * x + 1) / (math.cos(2 * y)))
+    return result
 
 
-def user_input():
+def get_numbers():
     while True:
         try:
             x = float(input("Enter number 'x': "))
@@ -30,9 +19,25 @@ def user_input():
     return x, y
 
 
+def calculate_safely(func):
+    def safe_version(x, y):
+        if x < 0:
+            print("There's number less than zero in the logarithm.")
+            return
+        elif math.cos(2 * y) == 0:
+            print("The denominator is equal zero")
+            return
+        return func(x, y)
+
+    return safe_version
+
+
 def main():
-    x, y = user_input()
-    calculate_func(x, y)
+    safe_calculation = calculate_safely(calculate_func)
+    x, y = get_numbers()
+    result = safe_calculation(x, y)
+    if result is not None:
+        print(f"Result is {result:.3f}")
 
 
 if __name__ == '__main__':

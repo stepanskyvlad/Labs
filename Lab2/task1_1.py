@@ -19,26 +19,28 @@ def get_numbers():
     return x, y
 
 
-def safe_calculate(func):
-    def save_version(x, y):
+def calculate_safely(func):
+    def safe_version(x, y):
         if (2 * x) > 709:
             print(f"Enter a smaller number x")
             return
         elif 3.8 * x + y < 0:
             print("There's the number less than zero in the logarithm")
             return
-        elif math.log(3.8 * x + y) < 0:
-            print("The denominator is less than zero")
+        elif math.log(3.8 * x + y) == 0:
+            print("The denominator is equal zero")
             return
         return func(x, y)
 
-    return save_version
+    return safe_version
 
 
 def main():
-    safe_culc_func = safe_calculate(calculate_func)
+    safe_calculation = calculate_safely(calculate_func)
     x, y = get_numbers()
-    print(safe_culc_func(x, y))
+    result = safe_calculation(x, y)
+    if result is not None:
+        print(f"There's result - {result:.3f}")
 
 
 if __name__ == '__main__':

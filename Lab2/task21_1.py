@@ -1,26 +1,50 @@
 import math
 
-x = float(input("Введіть X: "))
-y = float(input("Введіть Y: "))
-z = float(input("Введіть Z: "))
-a = float(input("Введіть A: "))
-b = float(input("Введіть B: "))
-while True:
-    if a - b ** 3 == 0:
-        print("На нуль ділити не можна")
-        a = float(input("Введіть A: "))
-        b = float(input("Введіть B: "))
-    else:
-        denominator = a - b ** 3
-        break
 
-while True:
-    if x + 2.6 * y * math.sin(z) < 0:
-        print("Під квадратним коренем число менше нуля \nСпробуйте ввести інші числа:")
-        x = float(input("Введіть X: "))
-        y = float(input("Введіть Y: "))
-        z = float(input("Введіть Z: "))
-    else:
-        F = math.sqrt(x + 2.6 * y * math.sin(z)) / denominator
-        print(f"Результат обчислень: {F}")
-        break
+# solve this function without any errors
+def calculate_func(x, y, z, a, b):
+    result = (math.sqrt(x + 2.6 * y * math.sin(z))) / (a - b ** 3)
+    return result
+
+
+def get_numbers():
+    while True:
+        try:
+            x = float(input("Enter X: "))
+            y = float(input("Enter Y: "))
+            z = float(input("Enter Z: "))
+            a = float(input("Enter A: "))
+            b = float(input("Enter B: "))
+        except ValueError as ve:
+            print(f"There's an error: {ve}")
+        else:
+            break
+    return x, y, z, a, b
+
+
+def calculate_safely(func):
+    def safe_version(x, y, z, a, b):
+        if not -1 <= z <= 1:
+            print("There's a wrong number in the sin.")
+            return
+        elif x + 2.6 * y * math.sin(z) < 0:
+            print("There's negative number in the square root")
+            return
+        elif (a - b ** 3) == 0:
+            print('There\'s a division by zero')
+            return
+        return func(x, y, z, a, b)
+
+    return safe_version
+
+
+def main():
+    safe_calculation = calculate_safely(calculate_func)
+    x, y, z, a, b = get_numbers()
+    result = safe_calculation(x, y, z, a, b)
+    if result is not None:
+        print(f"There's result - {result:.3f}")
+
+
+if __name__ == "__main__":
+    main()
