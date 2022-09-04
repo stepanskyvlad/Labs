@@ -6,27 +6,42 @@
 4.Вивести на друк числа, яким відповідають натуральні числа, як
 кубічні корені та самі ці кубічні корені (наприклад: 27 та 3).
 """
-import math
 
-number = 0
-while number < 100:
-    number = int(input('Введіть натуральне число більше 100: '))
 
-# Сформовуємо послідовність від 10 до N
-numbers = [n for n in range(10, number + 1)]
+def get_number():
+    number = 0
+    try:
+        while 0 >= number < 100:
+            number = int(input('Enter a natural number greater than 100: '))
+    except ValueError as ve:
+        print(f"There's an error - {ve}")
+    return number
 
-# Виводимо в друк натуральні числа, як квадрат числа і корінь числа
-for a in numbers:
-    if a % math.sqrt(a) == 0:
-        b = math.sqrt(a)
-        print(f"Квадрат числа {a} - корінь {b}")
-    else:
-        continue
 
-# Виводимо в друк натуральні числа, як куб числа і корінь числа
-for a1 in numbers:
-    if a1 % round(a1 ** (1 / 3.), 3) == 0:
-        b1 = round(a1 ** (1 / 3.), 3)
-        print(f"Куб числа {a1} - корінь {b1}")
-    else:
-        continue
+# let's form a sequence from 10 tо N
+def form_sequence(number):
+    numbers = [n for n in range(10, number + 1)]
+    return numbers
+
+
+# Print natural numbers: n-th root of a number x
+def print_roots_numbers(numbers):
+    def root_degree(n):
+        for x in numbers:
+            if x % round(x ** (1 / n), 3) == 0:
+                root = round(x ** (1 / n), 3)
+                print(f"{root} - a root of degree {n} of number {x}")
+            else:
+                continue
+    return root_degree
+
+
+def main():
+    number_list = form_sequence(get_number())
+    choose_degree = print_roots_numbers(number_list)
+    choose_degree(2)
+    choose_degree(3)
+
+
+if __name__ == "__main__":
+    main()
