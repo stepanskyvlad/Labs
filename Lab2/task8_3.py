@@ -1,3 +1,12 @@
+"""
+1.Ввести з клавіатури дійсне число A (> 1).
+2. Вивести найменше із цілих чисел N, для яких сума
+S = 1 + 1/2 + ... + 1/N буде більше A, (тобто, S>A)
+3. Вивести значення суми S.
+"""
+from timeit import default_timer as timer
+
+
 def get_number_a():
     while True:
         try:
@@ -9,6 +18,20 @@ def get_number_a():
         else:
             break
     return a
+
+
+def measure_time(func):
+    def inner(*args, **kwargs):
+
+        start = timer()
+
+        func(*args, **kwargs)
+
+        end = timer()
+
+        print(f"Function {func.__name__} took {end-start} for execution")
+    return inner
+
 # solving of the func using recursion, but "n" can't be greater than 996
 # def solve_func(n):
 #     if n == 1:
@@ -24,19 +47,23 @@ def get_number_a():
 #     return s
 
 
-# In my opinion, to improve this program we should
-# use multiprocessing or multithreading
-def main():
-    a = get_number_a()
+@measure_time
+def solve_func(a):
     n = 1
     s = 0
     while True:
-        s += 1/n
+        s += 1 / n
         if s > a:
             break
         n += 1
     print(f"The result of the function is {s:.10f}\n"
           f"The smallest integer is {n}")
+
+# In my opinion, to improve this program we should
+# use multiprocessing or multithreading
+def main():
+    a = get_number_a()
+    solve_func(a)
 
 
 if __name__ == "__main__":
