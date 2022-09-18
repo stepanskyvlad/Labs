@@ -59,6 +59,7 @@ def solve_func(a):
     print(f"The result of the function is {s:.10f}\n"
           f"The smallest integer is {n}")
 
+
 # In my opinion, to improve this program we should
 # use multiprocessing or multithreading
 def main():
