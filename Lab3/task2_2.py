@@ -1,17 +1,14 @@
-def get_decimal_num():
+# I must use bytes according to the task
+def get_binary_num():
     while True:
-        x = 0
-        binary = input("Enter your binary number: ")
+        binary = bytes(input("Enter your binary number: "), 'utf-8')
         for i in binary:
-            if i != '1' and i != '0':
-                x += 1
-        if x == 0:
-            print(f"{binary} is a binary number.")
-            break
+            if i != 49 and i != 48:  # 48 and 49 - zero and one in bytes
+                print(f"Please, try again.")
+                break
         else:
-            print(f"Please, try again.")
-            continue
-    return binary
+            de_binary = binary.decode('utf8')
+            return de_binary
 
 
 def get_decimal(num):
@@ -20,11 +17,10 @@ def get_decimal(num):
 
 
 def main():
-    binary_num = get_decimal_num()
+    binary_num = get_binary_num()
     decimal_num = get_decimal(binary_num)
     print(f"Your binary number in decimal system is {decimal_num}")
 
 
 if __name__ == '__main__':
     main()
-    
