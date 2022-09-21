@@ -32,8 +32,8 @@ def safe_calculation(func):
             print(f"There's the error - {te}")
         except KeyError as ke:
             print(f"There's the error - {ke}")
-        except:
-            print(f"unknown error")
+        except Exception as e:
+            print(f'Unknown error: {e}')
         else:
             return func(*args, **kwargs)
 
